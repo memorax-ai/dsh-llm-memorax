@@ -1,0 +1,21 @@
+- id: llm-pi-ai
+  config:
+    providers:
+      memorax:
+        displayName: Memorax DeepSeek
+        apiKeyEnv: DEEPSEEK_FLASH_API_KEY
+        api: openai-responses
+        baseURL: http://127.0.0.1:3081/v1
+        defaultContextWindow: 393216
+        defaultMaxTokens: 131072
+        defaultInput: [text]
+        models:
+          - id: deepseek-v4-flash
+            name: DeepSeek V4 Flash
+            contextWindow: 393216
+            maxTokens: 131072
+            input: [text]
+            reasoningEfforts:
+              off: high
+              high: high
+              max: max

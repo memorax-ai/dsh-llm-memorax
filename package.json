@@ -1,0 +1,60 @@
+{
+  "name": "dsh-llm-memorax",
+  "version": "0.1.0",
+  "description": "DSH provider preset for the Memorax DeepSeek V4 Flash gateway",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "llm-provider",
+    "memorax"
+  ],
+  "files": [
+    "bin",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "bin": {
+    "dsh-llm-memorax-bridge": "./bin/local-tls-bridge.mjs"
+  },
+  "scripts": {
+    "bridge": "node ./bin/local-tls-bridge.mjs",
+    "check": "node --check ./bin/local-tls-bridge.mjs",
+    "prepack": "npm run check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/memorax-ai/dsh-llm-memorax.git"
+  },
+  "bugs": {
+    "url": "https://github.com/memorax-ai/dsh-llm-memorax/issues"
+  },
+  "homepage": "https://github.com/memorax-ai/dsh-llm-memorax#readme",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "plugin": {
+      "schemaVersion": 1,
+      "displayName": {
+        "en": "Memorax DeepSeek",
+        "zh-CN": "Memorax DeepSeek"
+      },
+      "summary": {
+        "en": "Connect DSH to the internal DeepSeek V4 Flash gateway through the native pi-ai adapter.",
+        "zh-CN": "通过原生 pi-ai 适配器连接内部 DeepSeek V4 Flash 网关。"
+      },
+      "category": "runtime"
+    }
+  },
+  "engines": {
+    "node": "^22.22.3 || >=24.11.1"
+  },
+  "packageManager": "pnpm@11.19.0",
+  "peerDependencies": {
+    "@deepseek-ai/dsh-llm-pi-ai": "^0.1.0-rc.8 || >=0.1.1-rc.1 <0.1.2-0"
+  }
+}
