@@ -1,6 +1,6 @@
 {
   "name": "dsh-llm-memorax",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DSH provider preset for the Memorax DeepSeek V4 Flash gateway",
   "keywords": [
     "dsh-plugin",
