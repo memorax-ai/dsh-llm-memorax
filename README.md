@@ -26,3 +26,7 @@ export DEEPSEEK_FLASH_API_KEY='...'
 当前 Memorax 网关证书签发给 `deepseek-flash-api.memorax.space`，但服务端只接受 IP SNI。桥接固定连接该 IP，同时继续验证证书链，并按证书声明的域名校验证书；它只监听 `127.0.0.1`，避免影响 DSH 的其它 HTTPS 请求。
 
 这个包只负责 Provider 和模型预设。网关部署、SSH、GPU 进程及服务维护不属于插件职责。
+
+## DSH 兼容性
+
+依赖范围保留旧版，并放宽至 `0.1.6` 版本线（含预发布版）。`0.1.5-rc.2` 与 `0.1.6-alpha.2` 的原生 Config 校验已通过；此检查不包含真实网关模型调用。
