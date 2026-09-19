@@ -1,0 +1,30 @@
+name: CI
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        dsh: [0.1.5-rc.2, 0.1.6-alpha.2]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24.19.0
+      - run: npm run check
+      - name: Install isolated provider schema
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/upstream"
+          echo '{"private":true}' > "$RUNNER_TEMP/upstream/package.json"
+          npm install --prefix "$RUNNER_TEMP/upstream" --ignore-scripts --no-audit --no-fund "@deepseek-ai/dsh-llm-pi-ai@${{ matrix.dsh }}" yaml
+      - name: Validate provider configuration
+        shell: bash
+        run: node test/config.mjs "$RUNNER_TEMP/upstream"
+      - run: npm pack --dry-run
