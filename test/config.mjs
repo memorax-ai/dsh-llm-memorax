@@ -8,5 +8,6 @@ const require = createRequire(join(root, 'probe.cjs'))
 const patch = require('yaml').parse(readFileSync(new URL('../cordis.patch.yml', import.meta.url), 'utf8'))
 const { Config } = await import(pathToFileURL(require.resolve('@deepseek-ai/dsh-llm-pi-ai')))
 const validated = Config(patch[0].config)
-assert.equal(validated.providers.memorax.models[0].id, 'deepseek-v4-flash')
+const providers = typeof validated.providers.get === 'function' ? validated.providers.get() : validated.providers
+assert.equal(providers.memorax.models[0].id, 'deepseek-v4-flash')
 console.log('Native provider configuration accepted')
